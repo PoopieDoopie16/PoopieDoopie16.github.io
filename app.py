@@ -12,23 +12,23 @@ WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/flask_index')
+def flask_index():
+    return render_template('flask_index.html')
 
-@app.route('/california-management')
+@app.route('/flask_index/california-management')
 def california_management():
     return render_template('california_management.html')
 
-@app.route('/california-roleplay')
+@app.route('/flask_index/california-roleplay')
 def california_roleplay():
     return render_template('california_roleplay.html')
 
-@app.route('/projects')
+@app.route('/flask_index/projects')
 def projects():
     return render_template('projects.html')
 
-@app.route('/appeal', methods=['GET', 'POST'])
+@app.route('/flask_index/appeal', methods=['GET', 'POST'])
 def appeal():
     if request.method == 'POST':
         appeal_type = request.form['type']
@@ -42,10 +42,10 @@ def appeal():
         }
         
         requests.post(WEBHOOK_URL, json=data)
-        return redirect(url_for('index'))
+        return redirect(url_for('flask_index'))
     return render_template('appeal.html')
 
-@app.route('/admin-login', methods=['GET', 'POST'])
+@app.route('/flask_index/admin-login', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
         username = request.form['username']
@@ -56,16 +56,16 @@ def admin_login():
             return redirect(url_for('admin_dashboard'))
     return render_template('admin_login.html')
 
-@app.route('/admin-dashboard')
+@app.route('/flask_index/admin-dashboard')
 def admin_dashboard():
     if 'admin' in session:
         return render_template('admin_dashboard.html')
     return redirect(url_for('admin_login'))
 
-@app.route('/admin-logout')
+@app.route('/flask_index/admin-logout')
 def admin_logout():
     session.pop('admin', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('flask_index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
