@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Appeal{% endblock %}
+{% block content %}
+<h1>Appeal</h1>
+<form method="POST">
+    <label for="type">Type:</label>
+    <select id="type" name="type">
+        <option value="ban">Ban Appeal</option>
+        <option value="mute">Mute Appeal</option>
+    </select><br>
+    <label for="reason">Reason for appeal:</label>
+    <textarea id="reason" name="reason"></textarea><br>
+    <label for="ban_reason">Reason for ban/mute:</label>
+    <textarea id="ban_reason" name="ban_reason"></textarea><br>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
